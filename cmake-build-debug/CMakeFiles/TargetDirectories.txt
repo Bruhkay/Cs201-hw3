@@ -1,0 +1,3 @@
+/Users/burkay/Documents/Github/Cs201-hw3/cmake-build-debug/CMakeFiles/Cs201_hw3.dir
+/Users/burkay/Documents/Github/Cs201-hw3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/burkay/Documents/Github/Cs201-hw3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
