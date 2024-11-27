@@ -30,6 +30,7 @@ public:
     void deleteByValue(T value);
     void display() const;
     Node<T>* getHead() const;
+    void setHead(Node<T>* head);
 };
 
 #endif // LINKEDLIST_H

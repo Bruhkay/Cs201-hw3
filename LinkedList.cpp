@@ -106,3 +106,8 @@ template <typename T>
 Node<T>* LinkedList<T>::getHead() const {
     return head;
 }
+
+template <typename T>
+void LinkedList<T>::setHead(Node<T>* newHead) {
+    head = newHead;
+}

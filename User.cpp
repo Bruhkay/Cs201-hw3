@@ -16,11 +16,11 @@ void User::setID(int Id) {
 
 }
 int User::getID() const {
-
+    return ID;
 }
 void User::setName(string name) {
 
 }
 string User::getName() const {
-
+ return name;
 }
