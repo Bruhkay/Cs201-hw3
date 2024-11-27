@@ -13,8 +13,9 @@ public:
     ~User();
     void setID(int Id);
     int getID() const;
-    void setName(string name);
+    void setName(string nam);
     string getName() const;
+    LinkedList<Playlist> getPlaylists() const;
 private:
     int ID;
     string name;

@@ -18,6 +18,7 @@ public:
 
     void setID(int id);
     int getID() const;
+    LinkedList<Song> getSongs() const;
 
 private:
     int ID;

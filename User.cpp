@@ -13,14 +13,18 @@ User::~User() {
 
 }
 void User::setID(int Id) {
-
+ ID = Id;
 }
 int User::getID() const {
     return ID;
 }
-void User::setName(string name) {
-
+void User::setName(string nam) {
+ name = nam;
 }
 string User::getName() const {
  return name;
+}
+
+LinkedList<Playlist> User::getPlaylists() const {
+    return playlists;
 }

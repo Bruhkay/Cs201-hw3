@@ -15,3 +15,6 @@ void Playlist::setID(int id) {
 int Playlist::getID() const {
     return ID;
 }
+LinkedList<Song> Playlist::getSongs() const {
+    return songs;
+}

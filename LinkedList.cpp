@@ -43,12 +43,12 @@ template <typename T>
 void LinkedList<T>::insertSorted(T value) {
     Node<T>* newNode = new Node<T>(value);
 
-    if (!head || head->data > value) { // Insert at the beginning
+    if (!head || (head->data).getID() > value.getID()) { // Insert at the beginning
         newNode->next = head;
         head = newNode;
     } else {
         Node<T>* temp = head;
-        while (temp->next && temp->next->data < value) {
+        while (temp->next && temp->next->data.getID() < value.getID()) {
             temp = temp->next;
         }
         newNode->next = temp->next;
@@ -107,6 +107,7 @@ Node<T>* LinkedList<T>::getHead() const {
     return head;
 }
 
+// Set the head of the list
 template <typename T>
 void LinkedList<T>::setHead(Node<T>* newHead) {
     head = newHead;
