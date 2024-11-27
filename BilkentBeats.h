@@ -27,7 +27,6 @@ public:
     void printSongsInPlaylist( const int playlistId ) const;
 private:
     LinkedList<User> users;
-    LinkedList<Playlist> playlists;
     LinkedList<Song> songs;
 };
 #endif //BILKENTBEATS_H
