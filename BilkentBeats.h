@@ -4,7 +4,7 @@
 
 #ifndef BILKENTBEATS_H
 #define BILKENTBEATS_H
-#include <string>
+#include "User.h"
 
 using namespace std;
 class BilkentBeats {
@@ -26,6 +26,8 @@ public:
     void removeSongFromPlaylist( const int playlistId, const int songId );
     void printSongsInPlaylist( const int playlistId ) const;
 private:
-
+    LinkedList<User> users;
+    LinkedList<Playlist> playlists;
+    LinkedList<Song> songs;
 };
 #endif //BILKENTBEATS_H

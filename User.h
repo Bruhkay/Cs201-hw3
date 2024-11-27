@@ -4,7 +4,7 @@
 
 #ifndef USER_H
 #define USER_H
-#include <string>
+#include "Playlist.h"
 using namespace std;
 
 class User {
@@ -18,5 +18,6 @@ public:
 private:
     int ID;
     string name;
+    LinkedList<Playlist> playlists;
 };
 #endif //USER_H

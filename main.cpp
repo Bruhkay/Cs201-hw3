@@ -1,9 +1,11 @@
-#include <cstdio>
-//
-// Created by Burkay Tunçtürk on 26.11.2024.
-//
-int main() {
-    printf("Hello, World!\n");
-    return 0;
 
+#include <iostream>
+using namespace std;
+#include "BilkentBeats.h"
+int main() {
+    cout << "Hello World!" << endl;
+    BilkentBeats bilkentBeats();
+
+
+    return 0;
 }
