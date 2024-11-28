@@ -45,6 +45,8 @@ int main() {
     cout<<endl;
     bilkentBeats.removeSong(48);
     bilkentBeats.removeSong(45);
+
+    bilkentBeats.printSongsInPlaylist(16);
     bilkentBeats.removeSong(95);
     cout<<endl;
     bilkentBeats.printSongsInPlaylist(19);
@@ -61,6 +63,7 @@ int main() {
     bilkentBeats.removeSongFromPlaylist(19,43);
     bilkentBeats.removeSongFromPlaylist(18,85);
     cout<<endl;
+    /*
     bilkentBeats.removeUser(21);
     bilkentBeats.removeUser(25);
     bilkentBeats.removeUser(95);
@@ -77,6 +80,6 @@ int main() {
     bilkentBeats.printUsers();
     cout<<endl;
     bilkentBeats.printSongs();
-
+*/
     return 0;
 }

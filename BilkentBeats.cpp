@@ -251,8 +251,6 @@ void BilkentBeats::addSongToPlaylist( const int playlistId, const int songId ) {
         while (playlistNode) {
             if (playlistNode->data.getID() == playlistId) {
 
-                // Playlist found, now validate the song
-
                 // Check if the song exists in the music library
                 Node<Song>* songNode = songs.getHead();
                 while (songNode && songNode->data.getID() != songId) {
@@ -274,8 +272,8 @@ void BilkentBeats::addSongToPlaylist( const int playlistId, const int songId ) {
                     playlistSongNode = playlistSongNode->next;
                 }
 
-                // Add the song to the playlist
-                playlistNode->data.getSongs().insertAtEnd(songNode->data);
+                playlistNode->data.addSong(songNode->data);
+
                 cout << "Added song " << songId << " to playlist " << playlistId << "." << endl;
                 return;
             }

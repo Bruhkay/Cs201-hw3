@@ -18,3 +18,6 @@ int Playlist::getID() const {
 LinkedList<Song> Playlist::getSongs() const {
     return songs;
 }
+void Playlist::addSong(Song& song) {
+    songs.insertAtEnd(song);
+}
