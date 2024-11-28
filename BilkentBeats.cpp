@@ -174,6 +174,20 @@ void BilkentBeats::addPlaylist( const int userId, const int playlistId ) {
         userNode = userNode->next;
     }
 
+    Node<User>* userNodeTest = users.getHead();
+    while (userNodeTest ) {
+        Node<Playlist>* playlistNodeTest = userNodeTest->data.getPlaylists().getHead();
+
+        while (playlistNodeTest) {
+            if (playlistNodeTest->data.getID() == playlistId && userNodeTest->data.getID() != userId) {
+                cout << "Cannot add playlist. There is a user having a playlist with ID " << playlistId<<"."<<endl;
+                return;
+            }
+            playlistNodeTest = playlistNodeTest->next;
+        }
+        userNodeTest = userNodeTest->next;
+    }
+
     if (!userNode) {
         cout << "Cannot add playlist. There is no user with ID " << userId << "." << endl;
         return;
