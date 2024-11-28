@@ -25,7 +25,7 @@ string User::getName() const {
  return name;
 }
 
-LinkedList<Playlist> User::getPlaylists() const {
+LinkedList<Playlist>& User::getPlaylists() {
     return playlists;
 }
 

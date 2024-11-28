@@ -236,6 +236,7 @@ void BilkentBeats::addSongToPlaylist( const int playlistId, const int songId ) {
         Node<Playlist>* playlistNode = userNode->data.getPlaylists().getHead();
         while (playlistNode) {
             if (playlistNode->data.getID() == playlistId) {
+
                 // Playlist found, now validate the song
 
                 // Check if the song exists in the music library
