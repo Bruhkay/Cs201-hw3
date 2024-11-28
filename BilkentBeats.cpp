@@ -91,9 +91,13 @@ void BilkentBeats::printUsers() const {
 
     Node<User>* current = users.getHead();
     while (current) {
-        string userName = current->data.getName();  // Get the user name
-        cout << userName << endl;  // Print the user name
-        current = current->next;  // Move to the next user
+        string userName = current->data.getName();
+        int userId = current->data.getID();
+        string userPlaylists = current->data.getlistPlaylist();
+
+        cout << "User ID :"<< userId <<", Name : " << userName<<
+            ", Playlist IDs : "<< current->data.getlistPlaylist()<< endl;
+        current = current->next;
     }
 }
 
@@ -187,7 +191,7 @@ void BilkentBeats::addPlaylist( const int userId, const int playlistId ) {
 
     // Add the new playlist
     Playlist newPlaylist(playlistId);
-    userNode->data.getPlaylists().insertAtEnd(newPlaylist);
+    userNode->data.addPlaylist(newPlaylist);
     cout << "Added playlist " << playlistId << " to user " << userId << "." << endl;
 }
 void BilkentBeats::removePlaylist( const int userId, const int playlistId ) {

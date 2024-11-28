@@ -85,21 +85,6 @@ void LinkedList<T>::deleteByValue(T value) {
     }
 }
 
-// Display the list
-template <typename T>
-void LinkedList<T>::display() const {
-    if (!head) {
-        cout << "List is empty." << endl;
-        return;
-    }
-
-    Node<T>* temp = head;
-    while (temp) {
-        cout << temp->data << " -> ";
-        temp = temp->next;
-    }
-    cout << "nullptr" << endl;
-}
 
 // Get the head of the list
 template <typename T>

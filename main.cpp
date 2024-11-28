@@ -19,7 +19,9 @@ int main() {
     bilkentBeats.addUser(21, "Bugra");
     cout<<endl;
     bilkentBeats.addPlaylist(21,16);
-    bilkentBeats.addPlaylist(21,18);
+    bilkentBeats.printUsers();
+    bilkentBeats.addSongToPlaylist(16,45);
+    /*bilkentBeats.addPlaylist(21,18);
     bilkentBeats.addPlaylist(26,19);
     bilkentBeats.addPlaylist(29,15);
     bilkentBeats.addPlaylist(26,16);
@@ -77,6 +79,6 @@ int main() {
     bilkentBeats.printUsers();
     cout<<endl;
     bilkentBeats.printSongs();
-
+*/
     return 0;
 }

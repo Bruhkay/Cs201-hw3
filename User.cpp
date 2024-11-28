@@ -28,3 +28,26 @@ string User::getName() const {
 LinkedList<Playlist> User::getPlaylists() const {
     return playlists;
 }
+
+string User::getlistPlaylist() const {
+    string playliststring = "";
+    if (!playlists.getHead()) {
+        return "None";
+    }
+
+    Node<Playlist>* current = playlists.getHead();
+    playliststring +="[";
+    while (current) {
+        int playlistid = current->data.getID();
+        playliststring += to_string(playlistid);
+        if (current->next) {
+            playliststring += ",";
+        }
+        current = current->next;
+    }
+    playliststring +="]";
+    return playliststring;
+}
+void User::addPlaylist(Playlist& playlist) {
+    playlists.insertSorted(playlist);
+}

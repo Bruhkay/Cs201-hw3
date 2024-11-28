@@ -16,6 +16,8 @@ public:
     void setName(string nam);
     string getName() const;
     LinkedList<Playlist> getPlaylists() const;
+    string getlistPlaylist() const;
+    void addPlaylist(Playlist& pl);
 private:
     int ID;
     string name;
