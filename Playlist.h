@@ -4,7 +4,6 @@
 
 #ifndef PLAYLIST_H
 #define PLAYLIST_H
-#include <string>
 using namespace std;
 
 #include "Song.h"
@@ -20,6 +19,7 @@ public:
     int getID() const;
     LinkedList<Song> getSongs() const;
     void addSong(Song& song);
+    void removeSong(Song song);
 
 private:
     int ID;

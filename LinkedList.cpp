@@ -11,10 +11,17 @@ LinkedList<T>::~LinkedList() {
     while (current) {
         Node<T>* temp = current;
         current = current->next;
-        //delete temp; //TODO
+        //delete temp;
     }
 }
 
+// Insert a node at the beginning
+template <typename T>
+void LinkedList<T>::insertAtBeginning(T value) {
+    Node<T>* newNode = new Node<T>(value);
+    newNode->next = head;
+    head = newNode;
+}
 
 // Insert a node at the end
 template <typename T>
@@ -48,6 +55,36 @@ void LinkedList<T>::insertSorted(T value) {
         temp->next = newNode;
     }
 }
+
+// Delete a node by value
+template <typename T>
+void LinkedList<T>::deleteByValue(T value) {
+    if (!head) {
+        cout << "List is empty." << endl;
+        return;
+    }
+
+    if (head->data.getID() == value.getID()) { // If the value is in the head
+        Node<T>* temp = head;
+        head = head->next;
+        delete temp;
+        return;
+    }
+
+    Node<T>* temp = head;
+    while (temp->next && temp->next->data.getID() != value.getID()) {
+        temp = temp->next;
+    }
+
+    if (temp->next) { // Value found
+        Node<T>* nodeToDelete = temp->next;
+        temp->next = temp->next->next;
+        delete nodeToDelete;
+    } else {
+        cout << "Value not found in the list." << endl;
+    }
+}
+
 
 // Get the head of the list
 template <typename T>

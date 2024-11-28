@@ -88,14 +88,14 @@ void BilkentBeats::printUsers() const {
         cout << "There are no users to show." << endl;
         return;
     }
-
+    cout << "Users in the system:"<< endl;
     Node<User>* current = users.getHead();
     while (current) {
         string userName = current->data.getName();
         int userId = current->data.getID();
         string userPlaylists = current->data.getlistPlaylist();
 
-        cout << "User ID :"<< userId <<", Name : " << userName<<
+        cout << "User ID : "<< userId <<", Name : " << userName<<
             ", Playlist IDs : "<< current->data.getlistPlaylist()<< endl;
         current = current->next;
     }
@@ -137,6 +137,22 @@ void BilkentBeats::removeSong( const int songID ) {
         return;
     }
 
+    Node<User>* userNode = users.getHead();
+    while (userNode) {
+        Node<Playlist>* playlistNode = userNode->data.getPlaylists().getHead();
+        while (playlistNode) {
+            Node<Song>* songNode = playlistNode->data.getSongs().getHead();
+            while (songNode) {
+                if (songNode->data.getID() == songID) {
+                    playlistNode->data.removeSong(songNode->data);
+                }
+                songNode = songNode->next;
+            }
+            playlistNode = playlistNode->next;
+        }
+        userNode = userNode->next;
+    }
+
     // If the song is found
     if (!previous) { // The song is the head of the list
         songs.setHead(current->next);
@@ -167,7 +183,6 @@ void BilkentBeats::printSongs() const {
         current = current->next;
     }
 }
-
 void BilkentBeats::addPlaylist( const int userId, const int playlistId ) {
     Node<User>* userNode = users.getHead();
     while (userNode && userNode->data.getID() != userId) {
@@ -302,7 +317,7 @@ void BilkentBeats::removeSongFromPlaylist( const int playlistId, const int songI
                 }
 
                 if (!songNode) {
-                    cout << "Cannot remove song. Song with ID " << songId << " is not in playlist " << playlistId << "." << endl;
+                    cout << "Cannot remove song. There is no song " << songId << " in playlist " << playlistId << "." << endl;
                     return;
                 }
 
@@ -322,7 +337,7 @@ void BilkentBeats::removeSongFromPlaylist( const int playlistId, const int songI
         userNode = userNode->next;
     }
 
-    cout << "Cannot remove song. Playlist with ID " << playlistId << " does not exist." << endl;
+    cout << "Cannot remove song. There is no playlist with ID " << playlistId << "." << endl;
 }
 void BilkentBeats::printSongsInPlaylist( const int playlistId ) const {
     Node<User>* userNode = users.getHead();
@@ -335,7 +350,7 @@ void BilkentBeats::printSongsInPlaylist( const int playlistId ) const {
                 // Access the songs in the playlist
                 Node<Song>* songNode = playlistNode->data.getSongs().getHead();
                 if (!songNode) {
-                    cout << "There are no songs in playlist " << playlistId << "." << endl;
+                    cout << "There are no songs to show in playlist " << playlistId << "." << endl;
                     return;
                 }
 
@@ -359,5 +374,5 @@ void BilkentBeats::printSongsInPlaylist( const int playlistId ) const {
         userNode = userNode->next;
     }
 
-    cout << "Cannot print songs. Playlist with ID " << playlistId << " does not exist." << endl;
+    cout << "Cannot print songs. There is no playlist with ID " << playlistId << "." << endl;
 }

@@ -21,3 +21,6 @@ LinkedList<Song> Playlist::getSongs() const {
 void Playlist::addSong(Song& song) {
     songs.insertAtEnd(song);
 }
+void Playlist::removeSong(Song song) {
+    songs.deleteByValue(song);
+}
