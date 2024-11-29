@@ -172,23 +172,20 @@ void BilkentBeats::addPlaylist( const int userId, const int playlistId ) {
     cout << "Added playlist " << playlistId << " to user " << userId << "." << endl;
 }
 void BilkentBeats::removePlaylist(const int userId, const int playlistId) {
-    // Find the user with the specified userId
+
     Node<User>* userNode = users.getHead();
     while (userNode && userNode->data.getID() != userId) {
         userNode = userNode->next;
     }
 
     if (!userNode) {
-        // User not found
         cout << "Cannot remove playlist. There is no user with ID " << userId << "." << endl;
         return;
     }
 
-    // Find the playlist with the specified playlistId in the user's playlists
     Node<Playlist>* playlistNode = userNode->data.getPlaylists().getHead();
     while (playlistNode) {
         if (playlistNode->data.getID() == playlistId) {
-            // Playlist found; remove it
             userNode->data.removePlaylist(playlistNode->data);
             cout << "Removed playlist " << playlistId << " from user " << userId << "." << endl;
             return;
@@ -196,7 +193,6 @@ void BilkentBeats::removePlaylist(const int userId, const int playlistId) {
         playlistNode = playlistNode->next;
     }
 
-    // Playlist not found
     cout << "Cannot remove playlist. User " << userId << " does not have a playlist with ID " << playlistId << "." << endl;
 }
 void BilkentBeats::addSongToPlaylist( const int playlistId, const int songId ) {
