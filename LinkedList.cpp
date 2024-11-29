@@ -10,7 +10,7 @@ LinkedList<T>::~LinkedList() {
         Node<T>* temp = current;
         current = current->next;
         if (temp) {
-            //delete temp;
+            delete temp;
         }
 
     }
