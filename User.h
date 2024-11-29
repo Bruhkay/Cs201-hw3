@@ -18,6 +18,7 @@ public:
     LinkedList<Playlist>& getPlaylists();
     string getlistPlaylist() const;
     void addPlaylist(Playlist& pl);
+    void removePlaylist(Playlist& pl);
 private:
     int ID;
     string name;

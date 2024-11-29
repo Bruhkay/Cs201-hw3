@@ -16,7 +16,6 @@ BilkentBeats::~BilkentBeats() {
 void BilkentBeats::addUser( const int userId, const string userName ) {
     Node<User>* current = users.getHead();
 
-    // Check if the user already exists
     while (current) {
         if (current->data.getID() == userId) {
             cout << "Cannot add user. There is already a user with ID " << userId << "." << endl;
@@ -25,29 +24,11 @@ void BilkentBeats::addUser( const int userId, const string userName ) {
         current = current->next;
     }
 
-    // Create a new User object
     User newUser(userId, userName);
 
-    // Create a new node to store the user
     Node<User>* newNode = new Node<User>(newUser);
     newNode->next = nullptr;
-
-    // If the list is empty or the new user's ID is smaller than the first user's ID
-    if (!users.getHead() || users.getHead()->data.getID() > userId) {
-        newNode->next = users.getHead();
-        users.setHead(newNode);
-    } else {
-        // Traverse the list to find the correct position
-        Node<User>* temp = users.getHead();
-        while (temp->next && temp->next->data.getID() < userId) {
-            temp = temp->next;
-        }
-
-        // Insert the new user at the correct position
-        newNode->next = temp->next;
-        temp->next = newNode;
-    }
-
+    users.insertSorted(newUser);
     cout << "Added user " << userId << "." << endl;
 }
 void BilkentBeats::removeUser( const int userId ) {
@@ -57,29 +38,17 @@ void BilkentBeats::removeUser( const int userId ) {
     }
 
     Node<User>* current = users.getHead();
-    Node<User>* previous = nullptr;
 
-    // Traverse the list to find the user
     while (current && current->data.getID() != userId) {
-        previous = current;
         current = current->next;
     }
 
-    // If the user is not found
     if (!current) {
         cout << "Cannot remove user. There is no user with ID " << userId << "." << endl;
         return;
     }
 
-    // If the user is found
-    if (!previous) { // The user is the head of the list
-        users.setHead(current->next);
-    } else { // The user is in the middle or end of the list
-        previous->next = current->next;
-    }
-
-    // Delete the user's node and associated memory
-    delete current;
+    users.deleteByValue(current->data);
 
     cout << "Removed user " << userId << "." << endl;
 }
@@ -100,11 +69,9 @@ void BilkentBeats::printUsers() const {
         current = current->next;
     }
 }
-
 void BilkentBeats::addSong( const int songID, const string songName, const string artists ) {
     Node<Song>* current = songs.getHead();
 
-    // Check if the song already exists
     while (current) {
         if (current->data.getID() == songID) {
             cout << "Cannot add song. BilkentBeats already contains song " << songID << "." << endl;
@@ -113,25 +80,19 @@ void BilkentBeats::addSong( const int songID, const string songName, const strin
         current = current->next;
     }
 
-    // Create a new Song object
     Song newSong(songID, songName, artists);
-
-    // Insert the song in sorted order
+    Node<Song>* newNode = new Node<Song>(newSong);
+    newNode->next = nullptr;
     songs.insertSorted(newSong);
 
     cout << "Added song " << songID << "." << endl;
 }
 void BilkentBeats::removeSong( const int songID ) {
     Node<Song>* current = songs.getHead();
-    Node<Song>* previous = nullptr;
-
-    // Traverse the list to find the song
     while (current && current->data.getID() != songID) {
-        previous = current;
         current = current->next;
     }
 
-    // If the song is not found
     if (!current) {
         cout << "Cannot remove song. There is no song with ID " << songID << "." << endl;
         return;
@@ -153,15 +114,7 @@ void BilkentBeats::removeSong( const int songID ) {
         userNode = userNode->next;
     }
 
-    // If the song is found
-    if (!previous) { // The song is the head of the list
-        songs.setHead(current->next);
-    } else { // The song is in the middle or end of the list
-        previous->next = current->next;
-    }
-
-    delete current;
-
+    songs.deleteByValue(current->data);
     cout << "Removed song " << songID << "." << endl;
 }
 void BilkentBeats::printSongs() const {
@@ -208,7 +161,6 @@ void BilkentBeats::addPlaylist( const int userId, const int playlistId ) {
         return;
     }
 
-    // Check if the playlist ID already exists
     Node<Playlist>* playlistNode = userNode->data.getPlaylists().getHead();
     while (playlistNode) {
         if (playlistNode->data.getID() == playlistId) {
@@ -218,8 +170,12 @@ void BilkentBeats::addPlaylist( const int userId, const int playlistId ) {
         playlistNode = playlistNode->next;
     }
 
-    // Add the new playlist
+
+
     Playlist newPlaylist(playlistId);
+    Node<Playlist>* newNode = new Node<Playlist>(newPlaylist);
+    newNode->next = nullptr;
+
     userNode->data.addPlaylist(newPlaylist);
     cout << "Added playlist " << playlistId << " to user " << userId << "." << endl;
 }
@@ -234,13 +190,10 @@ void BilkentBeats::removePlaylist( const int userId, const int playlistId ) {
         return;
     }
 
-    // Attempt to remove the playlist
     LinkedList<Playlist> playlists = userNode->data.getPlaylists();
     Node<Playlist>* playlistNode = playlists.getHead();
-    Node<Playlist>* previous = nullptr;
 
     while (playlistNode && playlistNode->data.getID() != playlistId) {
-        previous = playlistNode;
         playlistNode = playlistNode->next;
     }
 
@@ -248,15 +201,7 @@ void BilkentBeats::removePlaylist( const int userId, const int playlistId ) {
         cout << "Cannot remove playlist. User " << userId << " does not have a playlist with ID " << playlistId << "." << endl;
         return;
     }
-
-    // Remove the playlist
-    if (!previous) {
-        playlists.setHead(playlistNode->next);
-    } else {
-        previous->next = playlistNode->next;
-    }
-
-    delete playlistNode;
+    userNode->data.removePlaylist(playlistNode->data);
     cout << "Removed playlist " << playlistId << " from user " << userId << "." << endl;
 }
 void BilkentBeats::addSongToPlaylist( const int playlistId, const int songId ) {
@@ -266,7 +211,6 @@ void BilkentBeats::addSongToPlaylist( const int playlistId, const int songId ) {
         while (playlistNode) {
             if (playlistNode->data.getID() == playlistId) {
 
-                // Check if the song exists in the music library
                 Node<Song>* songNode = songs.getHead();
                 while (songNode && songNode->data.getID() != songId) {
                     songNode = songNode->next;
@@ -277,7 +221,6 @@ void BilkentBeats::addSongToPlaylist( const int playlistId, const int songId ) {
                     return;
                 }
 
-                // Check if the song is already in the playlist
                 Node<Song>* playlistSongNode = playlistNode->data.getSongs().getHead();
                 while (playlistSongNode) {
                     if (playlistSongNode->data.getID() == songId) {
@@ -305,14 +248,11 @@ void BilkentBeats::removeSongFromPlaylist( const int playlistId, const int songI
         Node<Playlist>* playlistNode = userNode->data.getPlaylists().getHead();
         while (playlistNode) {
             if (playlistNode->data.getID() == playlistId) {
-                // Playlist found, now validate the song
 
-                // Check if the song exists in the playlist by song ID
                 Node<Song>* songNode = playlistNode->data.getSongs().getHead();
                 Node<Song>* previous = nullptr;
 
                 while (songNode && songNode->data.getID() != songId) {
-                    previous = songNode;
                     songNode = songNode->next;
                 }
 
@@ -321,14 +261,7 @@ void BilkentBeats::removeSongFromPlaylist( const int playlistId, const int songI
                     return;
                 }
 
-                // If song is found, remove it from the playlist
-                if (!previous) {
-                    playlistNode->data.getSongs().setHead(songNode->next);  // Remove from the head
-                } else {
-                    previous->next = songNode->next;  // Remove from the middle or end
-                }
-
-                delete songNode;  // Free the memory occupied by the song node
+                playlistNode->data.removeSong(songNode->data);
                 cout << "Removed song " << songId << " from playlist " << playlistId << "." << endl;
                 return;
             }
@@ -345,9 +278,7 @@ void BilkentBeats::printSongsInPlaylist( const int playlistId ) const {
         Node<Playlist>* playlistNode = userNode->data.getPlaylists().getHead();
         while (playlistNode) {
             if (playlistNode->data.getID() == playlistId) {
-                // Playlist found, now print the songs in the playlist
 
-                // Access the songs in the playlist
                 Node<Song>* songNode = playlistNode->data.getSongs().getHead();
                 if (!songNode) {
                     cout << "There are no songs to show in playlist " << playlistId << "." << endl;
@@ -356,11 +287,9 @@ void BilkentBeats::printSongsInPlaylist( const int playlistId ) const {
 
                 cout << "Songs in playlist " << playlistId << ":" << endl;
 
-                // Traverse the song objects in the playlist
                 while (songNode) {
-                    const Song& song = songNode->data;  // Get the Song object
+                    const Song& song = songNode->data;
 
-                    // Print the song details: ID, Name, Artist
                     cout << "Song " << song.getID() << " : "
                          << song.getName() << " - "
                          << song.getArtist() << endl;
