@@ -17,8 +17,8 @@ public:
 
     void setID(int id);
     int getID() const;
-    LinkedList<Song> getSongs() const;
-    void addSong(Song& song);
+    LinkedList<Song>& getSongs();
+    void addSong(Song song);
     void removeSong(Song song);
 
 private:

@@ -15,10 +15,10 @@ void Playlist::setID(int id) {
 int Playlist::getID() const {
     return ID;
 }
-LinkedList<Song> Playlist::getSongs() const {
+LinkedList<Song>& Playlist::getSongs() {
     return songs;
 }
-void Playlist::addSong(Song& song) {
+void Playlist::addSong(Song song) {
     songs.insertAtEnd(song);
 }
 void Playlist::removeSong(Song song) {

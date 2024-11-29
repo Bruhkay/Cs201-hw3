@@ -26,8 +26,7 @@ void BilkentBeats::addUser( const int userId, const string userName ) {
 
     User newUser(userId, userName);
 
-    Node<User>* newNode = new Node<User>(newUser);
-    newNode->next = nullptr;
+
     users.insertSorted(newUser);
     cout << "Added user " << userId << "." << endl;
 }
@@ -81,8 +80,7 @@ void BilkentBeats::addSong( const int songID, const string songName, const strin
     }
 
     Song newSong(songID, songName, artists);
-    Node<Song>* newNode = new Node<Song>(newSong);
-    newNode->next = nullptr;
+
     songs.insertSorted(newSong);
 
     cout << "Added song " << songID << "." << endl;
@@ -171,10 +169,7 @@ void BilkentBeats::addPlaylist( const int userId, const int playlistId ) {
     }
 
 
-
     Playlist newPlaylist(playlistId);
-    Node<Playlist>* newNode = new Node<Playlist>(newPlaylist);
-    newNode->next = nullptr;
 
     userNode->data.addPlaylist(newPlaylist);
     cout << "Added playlist " << playlistId << " to user " << userId << "." << endl;

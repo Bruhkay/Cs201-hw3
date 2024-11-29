@@ -7,12 +7,9 @@ template <typename T>
 LinkedList<T>::~LinkedList() {
     Node<T>* current = head;
     while (current) {
-        Node<T>* temp = current;
-        current = current->next;
-        if (temp) {
-            delete temp;
-        }
-
+        Node<T>* next = current->next;
+        delete current;
+        current = next;
     }
 }
 
@@ -86,9 +83,4 @@ void LinkedList<T>::deleteByValue(T value) {
 template <typename T>
 Node<T>* LinkedList<T>::getHead() const {
     return head;
-}
-
-template <typename T>
-void LinkedList<T>::setHead(Node<T>* newHead) {
-    head = newHead;
 }
