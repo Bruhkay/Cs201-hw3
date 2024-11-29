@@ -8,17 +8,14 @@ using namespace std;
 template <typename T>
 class Node {
 public:
-    T data;           // The data stored in the node
-    Node* next;       // Pointer to the next node in the list
+    T data;
+    Node* next;
 
     Node(T value) : data(value), next(nullptr) {}
 };
 
-// LinkedList class template
 template <typename T>
 class LinkedList {
-private:
-    Node<T>* head;    // Pointer to the head of the list
 
 public:
     LinkedList();     // Constructor
@@ -31,6 +28,8 @@ public:
     void display() const;
     Node<T>* getHead() const;
     void setHead(Node<T>* head);
+private:
+    Node<T>* head;
 };
 
 #endif // LINKEDLIST_H

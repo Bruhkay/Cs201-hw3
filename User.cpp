@@ -51,3 +51,6 @@ string User::getlistPlaylist() const {
 void User::addPlaylist(Playlist& playlist) {
     playlists.insertSorted(playlist);
 }
+void User::removePlaylist(Playlist& playlist) {
+    playlists.deleteByValue(playlist);
+}
