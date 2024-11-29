@@ -14,13 +14,6 @@ LinkedList<T>::~LinkedList() {
 }
 
 template <typename T>
-void LinkedList<T>::insertAtBeginning(T value) {
-    Node<T>* newNode = new Node<T>(value);
-    newNode->next = head;
-    head = newNode;
-}
-
-template <typename T>
 void LinkedList<T>::insertAtEnd(T value) {
     Node<T>* newNode = new Node<T>(value);
     if (!head) {
@@ -61,7 +54,7 @@ void LinkedList<T>::deleteByValue(T value) {
     if (head->data.getID() == value.getID()) {
         Node<T>* temp = head;
         head = head->next;
-        delete temp;
+        //delete temp;
         return;
     }
 
@@ -73,7 +66,7 @@ void LinkedList<T>::deleteByValue(T value) {
     if (temp->next) {
         Node<T>* nodeToDelete = temp->next;
         temp->next = temp->next->next;
-        delete nodeToDelete;
+        //delete nodeToDelete;
     } else {
         cout << "Value not found in the list." << endl;
     }

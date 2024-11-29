@@ -31,13 +31,8 @@ void BilkentBeats::addUser( const int userId, const string userName ) {
     cout << "Added user " << userId << "." << endl;
 }
 void BilkentBeats::removeUser( const int userId ) {
-    if (!users.getHead()) {
-        cout << "Cannot remove user. There is no user with ID " << userId << "." << endl;
-        return;
-    }
 
     Node<User>* current = users.getHead();
-
     while (current && current->data.getID() != userId) {
         current = current->next;
     }
@@ -47,9 +42,11 @@ void BilkentBeats::removeUser( const int userId ) {
         return;
     }
 
-    users.deleteByValue(current->data);
 
+
+    users.deleteByValue(current->data);
     cout << "Removed user " << userId << "." << endl;
+
 }
 void BilkentBeats::printUsers() const {
     if (!users.getHead()) {
@@ -174,30 +171,33 @@ void BilkentBeats::addPlaylist( const int userId, const int playlistId ) {
     userNode->data.addPlaylist(newPlaylist);
     cout << "Added playlist " << playlistId << " to user " << userId << "." << endl;
 }
-void BilkentBeats::removePlaylist( const int userId, const int playlistId ) {
+void BilkentBeats::removePlaylist(const int userId, const int playlistId) {
+    // Find the user with the specified userId
     Node<User>* userNode = users.getHead();
     while (userNode && userNode->data.getID() != userId) {
         userNode = userNode->next;
     }
 
     if (!userNode) {
+        // User not found
         cout << "Cannot remove playlist. There is no user with ID " << userId << "." << endl;
         return;
     }
 
-    LinkedList<Playlist> playlists = userNode->data.getPlaylists();
-    Node<Playlist>* playlistNode = playlists.getHead();
-
-    while (playlistNode && playlistNode->data.getID() != playlistId) {
+    // Find the playlist with the specified playlistId in the user's playlists
+    Node<Playlist>* playlistNode = userNode->data.getPlaylists().getHead();
+    while (playlistNode) {
+        if (playlistNode->data.getID() == playlistId) {
+            // Playlist found; remove it
+            userNode->data.removePlaylist(playlistNode->data);
+            cout << "Removed playlist " << playlistId << " from user " << userId << "." << endl;
+            return;
+        }
         playlistNode = playlistNode->next;
     }
 
-    if (!playlistNode) {
-        cout << "Cannot remove playlist. User " << userId << " does not have a playlist with ID " << playlistId << "." << endl;
-        return;
-    }
-    userNode->data.removePlaylist(playlistNode->data);
-    cout << "Removed playlist " << playlistId << " from user " << userId << "." << endl;
+    // Playlist not found
+    cout << "Cannot remove playlist. User " << userId << " does not have a playlist with ID " << playlistId << "." << endl;
 }
 void BilkentBeats::addSongToPlaylist( const int playlistId, const int songId ) {
     Node<User>* userNode = users.getHead();

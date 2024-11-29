@@ -4,7 +4,6 @@
 #include <iostream>
 using namespace std;
 
-// Node class template
 template <typename T>
 class Node {
 public:
@@ -23,7 +22,7 @@ public:
 
     void insertAtBeginning(T value);
     void insertAtEnd(T value);
-    void insertSorted(T value); // Inserts in ascending order
+    void insertSorted(T value);
     void deleteByValue(T value);
     void display() const;
     Node<T>* getHead() const;
