@@ -38,7 +38,7 @@ string User::getlistPlaylist() const {
     Node<Playlist>* current = playlists.getHead();
     playliststring +="[";
     while (current) {
-        int playlistid = *(current->data).getID();
+        int playlistid = current->data->getID();
         playliststring += to_string(playlistid);
         if (current->next) {
             playliststring += ",";

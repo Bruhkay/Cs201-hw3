@@ -7,7 +7,7 @@ using namespace std;
 template <typename T>
 class Node {
 public:
-    Node* data;
+    Node<T>* data;
     Node* next;
 
     Node(T* value);
