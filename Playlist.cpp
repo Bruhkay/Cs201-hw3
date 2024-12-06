@@ -6,7 +6,9 @@
 
 Playlist::Playlist(const int id) : ID(id) {}
 
-Playlist::~Playlist() {}
+Playlist::~Playlist() {
+    //songs.deleteList();
+}
 
 void Playlist::setID(int id) {
     ID = id;
@@ -18,8 +20,8 @@ int Playlist::getID() const {
 LinkedList<Song>& Playlist::getSongs() {
     return songs;
 }
-void Playlist::addSong(Song song) {
-    songs.insertAtEnd(song);
+void Playlist::addSong(Song* song) {
+    songs.insertAtEnd(*song);
 }
 void Playlist::removeSong(Song song) {
     songs.deleteByValue(song);

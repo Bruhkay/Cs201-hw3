@@ -7,10 +7,11 @@ using namespace std;
 template <typename T>
 class Node {
 public:
-    T data;
+    Node* data;
     Node* next;
 
-    Node(T value) : data(value), next(nullptr) {}
+    Node(T* value);
+    ~Node();
 };
 
 template <typename T>
@@ -27,6 +28,7 @@ public:
     void display() const;
     Node<T>* getHead() const;
     void setHead(Node<T>* head);
+    void deleteList();
 private:
     Node<T>* head;
 };
