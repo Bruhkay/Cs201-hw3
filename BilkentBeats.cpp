@@ -259,7 +259,6 @@ void BilkentBeats::removeSongFromPlaylist( const int playlistId, const int songI
             if (playlistNode->data.getID() == playlistId) {
 
                 Node<Song>* songNode = playlistNode->data.getSongs().getHead();
-                Node<Song>* previous = nullptr;
 
                 while (songNode && songNode->data.getID() != songId) {
                     songNode = songNode->next;
