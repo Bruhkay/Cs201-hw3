@@ -54,7 +54,8 @@ void LinkedList<T>::deleteByValue(T value) {
     if (head->data.getID() == value.getID()) {
         Node<T>* temp = head;
         head = head->next;
-        //delete temp;
+        delete temp;
+        temp = nullptr;
         return;
     }
 
@@ -67,8 +68,10 @@ void LinkedList<T>::deleteByValue(T value) {
         Node<T>* nodeToDelete = temp->next;
         temp->next = temp->next->next;
         delete nodeToDelete;
+        nodeToDelete = nullptr;
     } else {
         cout << "Value not found in the list." << endl;
+
     }
 }
 

@@ -42,7 +42,18 @@ void BilkentBeats::removeUser( const int userId ) {
         return;
     }
 
-
+    Node<Playlist>* currentplaylist = current->data.getPlaylists().getHead();
+    while (currentplaylist) {
+        Node<Playlist>* nextPlaylist = currentplaylist->next;
+        Node<Song>* songNNode = currentplaylist->data.getSongs().getHead();
+        while (songNNode) {
+            Node<Song>* nextSongNode = songNNode->next;
+            currentplaylist->data.removeSong(songNNode->data);
+            songNNode = nextSongNode;
+        }
+        current->data.removePlaylist(currentplaylist->data);
+        currentplaylist = nextPlaylist;
+    }
 
     users.deleteByValue(current->data);
     cout << "Removed user " << userId << "." << endl;
@@ -186,6 +197,13 @@ void BilkentBeats::removePlaylist(const int userId, const int playlistId) {
     Node<Playlist>* playlistNode = userNode->data.getPlaylists().getHead();
     while (playlistNode) {
         if (playlistNode->data.getID() == playlistId) {
+            Node<Song>* songNNode = playlistNode->data.getSongs().getHead();
+            while (songNNode) {
+                Node<Song>* nextSongNode = songNNode->next;
+                playlistNode->data.removeSong(songNNode->data);
+                songNNode = nextSongNode;
+            }
+
             userNode->data.removePlaylist(playlistNode->data);
             cout << "Removed playlist " << playlistId << " from user " << userId << "." << endl;
             return;
